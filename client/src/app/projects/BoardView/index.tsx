@@ -3,7 +3,7 @@ import React from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Task as TaskType } from "@/state/api";
-import { EllipsisVertical, Plus } from "lucide-react";
+import { EllipsisVertical, MessageSquareMore, Plus } from "lucide-react";
 import { format } from "date-fns";
 import Image from "next/image";
 
@@ -143,7 +143,7 @@ const Task = ({ task }: TaskProps) => {
     ? format(new Date(task.dueDate), "P")
     : "";
 
-  // const numberOfComments = (task.comments && task.comments.length) || 0;
+  const numberOfComments = (task.comments && task.comments.length) || 0;
 
   const PriorityTag = ({ priority }: { priority: TaskType["priority"] }) => (
     <div
@@ -174,7 +174,7 @@ const Task = ({ task }: TaskProps) => {
     >
       {task.attachments && task.attachments.length > 0 && (
         <Image
-          src={`/${task.attachments[0].fileURL}`}
+          src={`https://pmnext-s3-images.s3.us-east-1.amazonaws.com/${task.attachments[0].fileURL}`}
           alt={task.attachments[0].fileName}
           width={400}
           height={200}
@@ -221,12 +221,12 @@ const Task = ({ task }: TaskProps) => {
         <div className="mt-4 border-t border-gray-200 dark:border-stroke-dark" />
 
         {/* Users */}
-        {/* <div className="mt-3 flex items-center justify-between">
+        <div className="mt-3 flex items-center justify-between">
           <div className="flex -space-x-[6px] overflow-hidden">
             {task.assignee && (
               <Image
                 key={task.assignee.userId}
-                src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.assignee.profilePictureUrl!}`}
+                src={`https://pmnext-s3-images.s3.us-east-1.amazonaws.com/${task.assignee.profilePictureUrl!}`}
                 alt={task.assignee.username}
                 width={30}
                 height={30}
@@ -236,7 +236,7 @@ const Task = ({ task }: TaskProps) => {
             {task.author && (
               <Image
                 key={task.author.userId}
-                src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.author.profilePictureUrl!}`}
+                src={`https://pmnext-s3-images.s3.us-east-1.amazonaws.com/${task.author.profilePictureUrl!}`}
                 alt={task.author.username}
                 width={30}
                 height={30}
@@ -250,7 +250,7 @@ const Task = ({ task }: TaskProps) => {
               {numberOfComments}
             </span>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
